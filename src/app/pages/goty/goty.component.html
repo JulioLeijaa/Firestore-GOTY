@@ -1,0 +1,22 @@
+<div *ngIf="cargando" class="container mt-5 text-center">
+    <i class="fas fa-sync-alt fa-5x fa-spin"></i>
+    <h4>Cargando...</h4>
+</div>
+
+<div *ngIf="!cargando" class="row row-cols-1 row-cols-md-4 g-4">
+    <div *ngFor="let juego of juegos" lass="col">
+        <div class="card bg-dark">
+            <img src="{{ juego.url }}" class="card-img-top img-fluid" alt="Imagen juego">
+            <div class="card-body">
+                <h5 class="card-title">{{ juego.name }}</h5>
+                <p>Vota para que {{ juego.name }} gane.</p>
+                <div class="d-grid gap-2">
+                    <button (click)="votarJuego(juego)" class="btn btn-outline-primary">Votar</button>
+                </div>
+            </div>
+            <div class="card-footer">
+                <small>Votos: {{ juego.votos }}</small>
+            </div>
+        </div>
+    </div>
+</div>
