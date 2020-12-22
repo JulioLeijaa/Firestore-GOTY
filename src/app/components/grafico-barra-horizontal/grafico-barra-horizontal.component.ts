@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-grafico-barra-horizontal',
@@ -7,24 +7,31 @@ import { Component, OnDestroy } from '@angular/core';
 })
 export class GraficoBarraHorizontalComponent implements OnDestroy {
 
-  resultados: any[] = [
-    {
-      name: 'Juego 1',
-      value: 20
-    },
-    {
-      name: 'Juego 2',
-      value: 25
-    },
-    {
-      name: 'Juego 3',
-      value: 15
-    },
-    {
-      name: 'Juego 4',
-      value: 30
-    }
-  ];
+  @Input() resultados: any[] = [];
+  seleccionado: boolean;
+  juegoSeleccionado = {
+    name: '',
+    value: 0
+  };
+
+  // resultados: any[] = [
+  //   {
+  //     name: 'Juego 1',
+  //     value: 20
+  //   },
+  //   {
+  //     name: 'Juego 2',
+  //     value: 25
+  //   },
+  //   {
+  //     name: 'Juego 3',
+  //     value: 15
+  //   },
+  //   {
+  //     name: 'Juego 4',
+  //     value: 30
+  //   }
+  // ];
 
   // options
   showXAxis = true;
@@ -38,28 +45,32 @@ export class GraficoBarraHorizontalComponent implements OnDestroy {
 
   colorScheme = 'nightLights';
 
-  intervalo;
+  // intervalo;
 
   constructor() {
-    this.intervalo = setInterval( () => {
-      console.log('tick');
+    this.seleccionado = false;
+    // this.intervalo = setInterval( () => {
+    //   console.log('tick');
 
-      const newResults = [...this.resultados];
+    //   const newResults = [...this.resultados];
 
-      // tslint:disable-next-line:forin
-      for (const i in newResults) {
-        newResults[i].value = Math.round(Math.random() * 500);
-      }
+    //   // tslint:disable-next-line:forin
+    //   for (const i in newResults) {
+    //     newResults[i].value = Math.round(Math.random() * 500);
+    //   }
 
-      this.resultados = [...newResults];
-    }, 1500);
+    //   this.resultados = [...newResults];
+    // }, 1500);
   }
 
   onSelect(event): void{
-    console.log(event);
+    this.juegoSeleccionado.name = event.name;
+    this.juegoSeleccionado.value = event.value;
+    this.seleccionado = true;
+    setTimeout( () => this.seleccionado = false, 3500);
   }
 
   ngOnDestroy(): void{
-    clearInterval(this.intervalo);
+    // clearInterval(this.intervalo);
   }
 }

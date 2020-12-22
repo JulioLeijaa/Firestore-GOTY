@@ -4,3 +4,9 @@
         [yAxisLabel]="yAxisLabel" (select)="onSelect($event)">
     </ngx-charts-bar-horizontal>
 </div>
+
+<div *ngIf="seleccionado" class="container text-center">
+    <div class="alert" role="alert">
+        El juego {{ juegoSeleccionado.name }} tiene {{ juegoSeleccionado.value }} votos.
+    </div>
+</div>
